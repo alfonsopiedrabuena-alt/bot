@@ -3,7 +3,18 @@ from selenium import webdriver
 PATH = '/Applications/chromedriver'
 driver = webdriver.Chrome(PATH)
 
-driver.get('https://tec.mx/es/ambiente-construido')
+
+sitios = {
+    'Ambiente Construido':'https://tec.mx/es/ambiente-construido',
+    'Ciencias Sociales':'https://tec.mx/es/ciencias-sociales',
+    'Negocios':'https://tec.mx/es/negocios',
+}
+    
+for ligas in sitios.values():
+    print (ligas)
+    
+driver.get(ligas)
+
 print(driver.title)
 
 nombre = '//*[@id="edit-nombre"]'
@@ -11,7 +22,7 @@ apellido_paterno = '//*[@id="edit-apellido-paterno"]'
 apellido_materno = '//*[@id="edit-apellido-materno"]'
 telefono = '//*[@id="edit-telefono"]'
 mail_u = '//*[@id="edit-correo"]'
-dia_nac = '/html/body/div[1]/div/div[2]/div/div/article/div[2]/div/div[12]/div/div/div[2]/div[2]/form/fieldset/div[2]/fieldset[1]/fieldset[1]/div[1]/div'
+dia_nac = '//*[@id="edit-birth"]/div[1]/div/div/div'
 dia = '//*[@id="edit-birth"]/div[1]/div/div/div/ul/li[14]'
 mes_nac = '//*[@id="edit-birth"]/div[2]/div/div/div'
 mes = '//*[@id="edit-birth"]/div[2]/div/div/div/ul/li[3]'
