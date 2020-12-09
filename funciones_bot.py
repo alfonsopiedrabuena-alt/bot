@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.support import expected_conditions as EC
 
 PATH = '/Applications/chromedriver'
 driver = webdriver.Chrome(PATH)
@@ -6,6 +7,7 @@ driver = webdriver.Chrome(PATH)
 def run():
     sitios_areas()
     print ('Terminó')
+    driver.quit()
 
 
 def sitios_areas():
@@ -23,13 +25,13 @@ def sitios_areas():
     }
 
     for ligas in sitios.values():
-        print (ligas)
         driver.get(ligas)
-        accion_bot()
-
+        accion_bot(ligas)
         print(driver.title)
+    
+    return ligas
 
-def  accion_bot():
+def  accion_bot(ligas):
     nombre = '//*[@id="edit-nombre"]'
     apellido_paterno = '//*[@id="edit-apellido-paterno"]'
     apellido_materno = '//*[@id="edit-apellido-materno"]'
@@ -57,10 +59,14 @@ def  accion_bot():
     driver.find_element_by_xpath(apellido_materno).send_keys('Torrecillas')
     driver.find_element_by_xpath(telefono).send_keys('5539337086')
     driver.find_element_by_xpath(mail_u).send_keys('alfonso.piedrabuena@tec.mx')
-    lista = [dia_nac,dia,mes_nac,mes,ano_nac,ano,campus_opt,campus,fecha_opt,fecha,area_opt,area,carrera_opt,carrera,aviso_check,submit]
-    for elementos in lista:
-        driver.find_element_by_xpath(elementos).click()
-    print('fin de la ejecución')
+
+    try:
+        lista = [dia_na,dia,mes_nac,mes,ano_nac,ano,campus_opt,campus,fecha_opt,fecha,area_opt,area,carrera_opt,carrera,aviso_check,submit]
+        for elementos in lista:
+            driver.find_element_by_xpath(elementos).click()
+        print('ejecución correcta')
+    except:
+        print(f'El error sucedió en: '+ ligas)
     
 
 if __name__ == '__main__':
