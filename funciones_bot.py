@@ -6,8 +6,8 @@ driver = webdriver.Chrome(PATH)
 
 def run():
     sitios_areas()
-    print ('Terminó')
     driver.quit()
+    print ('Terminó')
 
 
 def sitios_areas():
@@ -60,14 +60,19 @@ def  accion_bot(ligas):
     driver.find_element_by_xpath(telefono).send_keys('5539337086')
     driver.find_element_by_xpath(mail_u).send_keys('alfonso.piedrabuena@tec.mx')
 
+    x = 1
+    y = 1
+
     try:
-        lista = [dia_na,dia,mes_nac,mes,ano_nac,ano,campus_opt,campus,fecha_opt,fecha,area_opt,area,carrera_opt,carrera,aviso_check,submit]
+        lista = [dia_nac,dia,mes_nac,mes,ano_nac,ano,campus_opt,campus,fecha_opt,fecha,area_opt,area,carrera_opt,carrera,aviso_check,submit]
         for elementos in lista:
             driver.find_element_by_xpath(elementos).click()
         print('ejecución correcta')
+        return x
     except:
         print(f'El error sucedió en: '+ ligas)
-    
+        return y
+
 
 if __name__ == '__main__':
     run()
