@@ -23,8 +23,10 @@ def run():
 
 
 def sitios_areas():
-    sheet = client.open('BD para BOT').sheet1
-    data = sheet.col_values(2)
+    sheet = client.open('BD para BOT')
+    #la siguiente linea de código sirve para revisar que hoja estaré jalando. Esto debería de ser una variable a llenar de acuerdo la necesidad, incluso un parámetro.
+    worksheet = sheet.get_worksheet(1)
+    data = worksheet.col_values(2)
     for links in data:
         driver.get(links)
         accion_bot(links)
