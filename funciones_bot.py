@@ -6,6 +6,16 @@ from oauth2client.service_account import ServiceAccountCredentials
 PATH = '/Applications/chromedriver'
 driver = webdriver.Chrome(PATH)
 
+scope = [
+    'https://spreadsheets.google.com/feeds',
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive.file',
+    'https://www.googleapis.com/auth/drive',
+    ]
+
+creds = ServiceAccountCredentials.from_json_keyfile_name('bot-final-064b84841ced.json', scope)
+client=gspread.authorize(creds)
+
 def run():
     sitios_areas()
     driver.quit()
@@ -13,25 +23,12 @@ def run():
 
 
 def sitios_areas():
-
-    sitios = {
-        'Ambiente Construido':'https://tec.mx/es/ambiente-construido',
-        'Ciencias Sociales':'https://tec.mx/es/ciencias-sociales',
-        'Negocios':'https://tec.mx/es/negocios',
-        'Estudios Creativos':'https://tec.mx/es/estudios-creativos',
-        'Salud':'https://tec.mx/es/salud',
-        'Ingeniería-Innovación y Transformación':'https://tec.mx/es/innovacion-y-transformacion',
-        'Ingeniería-Computación y Tecnologías de Información':'https://tec.mx/es/computacion-y-tecnologias-de-informacion',
-        'Ingeniería-Bioingeniería y Procesos Químicos':'https://tec.mx/es/bioingenieria-y-procesos-quimicos',
-        'Ingeniería-Ciencias Aplicadas':'https://tec.mx/es/ciencias-aplicadas'
-    }
-
-    for ligas in sitios.values():
-        driver.get(ligas)
-        accion_bot(ligas)
-        print(driver.title)
-    
-    return ligas
+    sheet = client.open('BD para BOT').sheet1
+    data = sheet.col_values(2)
+    for links in data:
+        driver.get(links)
+        accion_bot(links)
+        print(links)
 
 def  accion_bot(ligas):
     nombre = '//*[@id="edit-nombre"]'
