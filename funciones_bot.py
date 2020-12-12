@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 PATH = '/Applications/chromedriver'
 driver = webdriver.Chrome(PATH)

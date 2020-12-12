@@ -1,5 +1,6 @@
 from selenium import webdriver
 
+
 PATH = '/Applications/chromedriver'
 driver = webdriver.Chrome(PATH)
 
