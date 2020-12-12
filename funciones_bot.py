@@ -30,6 +30,7 @@ def sitios_areas():
         accion_bot(links)
         print(links)
 
+#recuerda siempre poner atención en la indexación del return
     return links
 
 def  accion_bot(links):
